@@ -29,11 +29,6 @@ class WeightedQuickUnionUF:
     :vartype _count: int  
     :vartype _parent: list[int]
     :vartype _size: list[int]  
-
-    :py:func: find(p)
-    :py:func: _validate(p)
-    :py:func: count()
-    :py:func: union(p, q)
     """
 
 
@@ -55,7 +50,7 @@ class WeightedQuickUnionUF:
         Returns the canonical element of the set containing element {p}.
         :param p: an element
         :raises IllegalArgumentException: unless {0 <= p < n}
-        :returns: the canonical element of the set containing {p}
+        :return: the canonical element of the set containing {p}
         :rtype: int 
         """
         self._validate(p)
@@ -72,7 +67,7 @@ class WeightedQuickUnionUF:
     def count(self) -> int:
         """
         Returns the number of sets. 
-        :returns: the number of sets (between {1} and {n})
+        :return: the number of sets (between {1} and {n})
         :rtype: int
         """
         return self._count

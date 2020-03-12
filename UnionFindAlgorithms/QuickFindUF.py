@@ -21,12 +21,6 @@ class QuickFindUF:
     
     :vartype _count: int
     :vartype _id: list[int]
-
-    :py:func: count() 
-    :py:func: find(p)
-    :py:func: validate(p)
-    :py:func: union(p, q)
-    
     """
     from UF import IllegalArgumentException
 
@@ -44,7 +38,7 @@ class QuickFindUF:
     def count(self) -> int:
         """
         Returns the number of sets. 
-        :returns: the number of sets (between {1} and {n})
+        :return: the number of sets (between {1} and {n})
         :rtype: int 
         """
         return self._count 
@@ -54,7 +48,7 @@ class QuickFindUF:
         Returns the canonical element of the set containing element {p}.
         :param p: an element
         :raises IllegalArgumentException: unless {0 <= p < n}
-        :returns: the canonical element of the set containing {p}
+        :return: the canonical element of the set containing {p}
         :rtype: int 
         """
         self._validate(p)

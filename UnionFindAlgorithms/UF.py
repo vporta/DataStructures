@@ -30,12 +30,6 @@ class UF:
     :vartype _count: int  
     :vartype _parent: list[int]
     :vartype _rank: list[int]  
-
-    :py:func: find(p)
-    :py:func: _validate(p)
-    :py:func: connected(p, q)
-    :py:func: count()
-    :py:func: union(p, q)
     """
 
 
@@ -57,7 +51,7 @@ class UF:
         Returns the canonical element of the set containing element {p}.
         :param p: an element
         :raises IllegalArgumentException: unless {0 <= p < n}
-        :returns: the canonical element of the set containing {p}
+        :return: the canonical element of the set containing {p}
         :rtype: int 
         """
         self._validate(p)
@@ -74,7 +68,7 @@ class UF:
     def count(self) -> int:
         """
         Returns the number of sets. 
-        :returns: the number of sets (between {1} and {n})
+        :return: the number of sets (between {1} and {n})
         :rtype: int
         """
         return self._count
@@ -85,7 +79,7 @@ class UF:
         :param p: one element 
         :param q: the other element 
         :raises IllegalArgumentException: unless both {0 <= p < n} and {0 <= q < n}.  
-        :returns: {True} if {p} and {q} are in the same set; {False} otherwise. 
+        :return: {True} if {p} and {q} are in the same set; {False} otherwise. 
         :rtype: bool 
         """
         return self.find(p) == self.find(q)
