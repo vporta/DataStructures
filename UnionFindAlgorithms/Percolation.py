@@ -83,7 +83,7 @@ class Percolation:
                 self.uf.union(current_site, self.convert2dto1dcoord(i, j - 1))
                 self.uf_perc.union(current_site, self.convert2dto1dcoord(i, j - 1))
 
-        # union with left cell
+        # union with right cell
         if j < self.n:
             if self.is_open(i, j + 1):
                 self.uf.union(current_site, self.convert2dto1dcoord(i, j+1))
