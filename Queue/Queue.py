@@ -16,16 +16,14 @@ A generic queue.
 
 
 class Queue:
+    
     class _Node:
         def __init__(self, _item=None, _next=None):
             self._item = _item 
             self._next = _next
 
-        def __str__(self):
-            return f"<_Node(_item={self._item}, _next={self._next})>"
-
-        def __repr(self):
-            return str(self)
+        def __repr__(self):
+            return return f"<_Node(_item={self._item}, _next={self._next})>"
 
     def __init__(self, first=None, last=None):
         self.first = first 
@@ -61,11 +59,8 @@ class Queue:
         if self.is_empty(): self.last = None 
         return item 
 
-    def __str__(self):
+    def __repr__(self):
         return f"<Queue(first={self.first}, last={self.last}, n={self.n})>"
-
-    def __repr(self):
-        return str(self)
 
     def __iter__(self):
         a = []

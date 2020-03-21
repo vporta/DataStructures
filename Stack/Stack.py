@@ -1,6 +1,6 @@
 """
 Stack.py 
-The {@code Stack} class represents a last-in-first-out (LIFO) stack of generic items.
+The class represents a last-in-first-out (LIFO) stack of generic items.
  *  It supports the usual <em>push</em> and <em>pop</em> operations, along with methods
  *  for peeking at the top item, testing if the stack is empty, and iterating through
  *  the items in LIFO order.
@@ -18,11 +18,8 @@ class Stack:
             self._item = _item 
             self._next = _next 
 
-        def __str__(self):
+        def __repr__(self):
             return f"<_Node(_item={self._item}, _next={self._next})>"
-
-        def __repr(self):
-            return str(self)
 
     def __init__(self, first=None):
         self.first = first
@@ -52,11 +49,8 @@ class Stack:
         if self.is_empty(): raise Exception('Stack underflow')
         return self.first._item
 
-    def __str__(self):
+    def __repr__(self):
         return f"<Stack(first={self.first}, n={self.n})>"
-
-    def __repr(self):
-        return str(self)
 
     def __iter__(self):
         a = []

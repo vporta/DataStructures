@@ -5,11 +5,7 @@ class Item:
     def __init__(self, item, priority):
         self.item = item 
         self.priority = priority
-
-
-    # def __str__(self):
-    #     return f"<Item(item={self.item}, priority={self.priority})>"
-
+        
 
     def __repr__(self):
         return f"<Item(item={self.item}, priority={self.priority})>"
