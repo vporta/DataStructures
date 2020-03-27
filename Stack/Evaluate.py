@@ -11,6 +11,7 @@ from collections import deque
 class Evaluate:
     ops = deque()  # operand stack: +, *
     vals = deque()  # integer stack: 3, 1
+    
     @classmethod
     def eval(cls, expression: str) -> int:
         for i in range(len(expression)):

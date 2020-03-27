@@ -1,13 +1,4 @@
-class ListNode:
-    def __init__(self, value=None):
-        self.value = value 
-        self.next = None  
-
-    def __lt__(self, other):
-        return self.value < other.value 
-
-    def __repr__(self):
-        return '<ListNode(value = %s, next = %s)>' % (self.value, self.next)
+from . import ListNode
 
 class LinkedList:
     """
@@ -63,6 +54,9 @@ class LinkedList:
             temp = temp.next 
             count += 1 
         return count 
+
+    def size(self):
+        return self.__get_length()
 
 
     def append_to_middle(self, value):
@@ -134,7 +128,7 @@ def main():
     ll.traverse()
     ll.get_array_of_values()
     print(ll.values)
-main()
+# main()
 
 
 
