@@ -21,122 +21,120 @@ class MinPQ:
     def __init__(self):
         """ initializes and empty priority queue"""
         self.pq = []
-        self.n = len(self.pq) 
-
+        self.build_heap(self.pq)
+    
+    def __len__(self):
+        return len(self.pq) - 1
 
     def is_empty(self):
         """ Returns true if this priority queue is empty."""
-        return self.n == 0 
-
+        return self.size() == 1 
 
     def size(self):
         """ Returns the number of keys on this priority queue."""
-        return self.n 
-
+        return len(self) 
 
     def min(self):
         """ Returns a smallest key on this priority queue."""
         if self.is_empty(): raise Exception('Priority Queue underflow.')
-        return self.pq[0]
+        return self.pq[1]
     
     def insert(self, x):
         """ Adds a new item to this priority queue."""
         self.pq.append(x)
-        self.n += 1
-        # self.pq.insert(self.n, x)
-        self.swim(self.n)
-        # assert self.is_min_heap()        
+        self.swim()
 
     def del_min(self):
         """ Removes and returns a smallest key on this priority queue"""
         if self.is_empty(): raise Exception('Priority Queue underflow.')
         _min = self.min()
-        n = self.n
-        n -= 1
-        self.exch(0, n)
-        self.sink(0)
+        self.pq[1] = self.pq[len(self)]
+        self.pq.pop()
+        self.sink(1)
         assert self.is_min_heap()
         return _min 
 
+    def build_heap(self, alist):
+        i = len(alist) // 2
+        self.pq = [0] + alist
+        while i > 0:
+            self.sink(i)
+            i = i - 1
 
     # ***************************************************************************
     # * Helper functions to restore the heap invariant.
     # ***************************************************************************
 
-    def swim(self, k):
-        # current_value = self.pq[k]
-        # parent_k, parent_value = self.__get_parent(k)
-        # if k > 0 and self.compare(current_value, parent_value):
-        #     self.pq[parent_index], self.pq[index] = current_value, parent_value
-        #     self.__siftup(parent_index)
-        # return
-        parent = (k-1) // 2
-        import pdb; pdb.set_trace()  # breakpoint 649c817a //
-        while k > 0 and self.greater(parent, k):
-            self.exch(k, parent)
-            k = parent
+    def swim(self):
+        i = len(self)
+        while i // 2 > 0 and self.greater(i//2, i):
+            self.exch(i//2, i)
+            i = i//2
 
+    def sink(self, i):
+        while i * 2 <= len(self):
+            mc = self.min_child(i)
+            if self.greater(i, mc):
+                self.exch(i, mc)
+            i = mc
 
-    def sink(self, k):
-        n = self.n
-        while (2*k <= n):
-            j = 2 * k 
-            if j < n and self.greater(j, j + 1): 
-                j += 1
-            if not self.greater(k, j): 
-                break 
-            self.exch(k, j)
-            k = j 
+    def min_child(self, i):
+        if i * 2 + 1 > len(self):
+            return i * 2
 
+        if self.pq[i * 2] < self.pq[i * 2 + 1]:
+            return i * 2
+
+        return i * 2 + 1
 
     # ***************************************************************************
-    # * Helper functions for compares and swaps.
+    #  Helper functions for compares and swaps.
     # ***************************************************************************
-
 
     def greater(self, i, j):
         pq = self.pq 
         return pq[i] > pq[j]
 
-
     def exch(self, i, j):
         pq = self.pq
         pq[i], pq[j] = pq[j], pq[i]
-
     
     def is_min_heap(self):
-        pq, n = self.pq, self.n
+        pq, n = self.pq, len(self)
         for i in range(n):
             if pq[i] is None: return False 
         for i in range(n+1, len(pq)):
             if pq[i] is not None: return False 
-        if pq[0] is not None: return False 
-        return self.is_min_heap_ordered(0)
+        if pq[1] is not None: return False 
+        return self.is_min_heap_ordered(1)
 
-
-    def is_min_heap_ordered(self, k):
-        n = self.n 
-        if k > n: return True 
-        left, right = 2 * k + 1, 2 * k + 2 
-        if left <= n and self.greater(k, left): return False 
-        if right <= n and self.greater(k, right): return False 
+    def is_min_heap_ordered(self, i):
+        n = len(self) 
+        if i > n: return True 
+        left, right = 2 * i, 2 * i + 1 
+        if left <= n and self.greater(i, left): return False 
+        if right <= n and self.greater(i, right): return False 
         return self.is_min_heap_ordered(left) and self.is_min_heap_ordered(right)
 
+    def __repr__(self):
+        return f'<MinPQ(pq={self.pq}, n={len(self)})>'
 
-
+    def __iter__(self):
+        yield from self.pq
 
 def main():
-    keys = 'P Q E - X A M - P L E -'
-    # keys = keys.replace(' ', '')
-    # keys = [('A', 8), ('E', 3), ('B', 5), ('Z', 2)]
+    keys = [9, 5, 6, 2, 3]
     pq = MinPQ()
-    for i, key in enumerate(keys):
+   
+    for key in keys:
         print(key)
-        if not key == '-': pq.insert(key)
-        elif not pq.is_empty(): print(pq.del_min() + ' ')
-        # print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
+        pq.insert(key)
+        if not pq.is_empty(): print(pq.del_min(), ' ')
+        print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
+    print(pq)
     print(f'( {pq.size()} left on pq.')
-    
+
+
 if __name__ == '__main__':
     print(main())
 

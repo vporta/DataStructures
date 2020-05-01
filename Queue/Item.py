@@ -2,7 +2,7 @@
 
 class Item:
 
-    def __init__(self, item, priority):
+    def __init__(self, item, priority=0):
         self.item = item 
         self.priority = priority
         
