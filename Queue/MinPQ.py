@@ -122,21 +122,21 @@ class MinPQ:
     def __iter__(self):
         yield from self.pq
 
-def main():
-    keys = [9, 5, 6, 2, 3]
-    pq = MinPQ()
+# def main():
+#     keys = [9, 5, 6, 2, 3]
+#     pq = MinPQ()
    
-    for key in keys:
-        print(key)
-        pq.insert(key)
-        if not pq.is_empty(): print(pq.del_min(), ' ')
-        print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
-    print(pq)
-    print(f'( {pq.size()} left on pq.')
+#     for key in keys:
+#         print(key)
+#         pq.insert(key)
+#         if not pq.is_empty(): print(pq.del_min(), ' ')
+#         print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
+#     print(pq)
+#     print(f'( {pq.size()} left on pq.')
 
 
-if __name__ == '__main__':
-    print(main())
+# if __name__ == '__main__':
+#     print(main())
 
 
 
