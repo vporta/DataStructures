@@ -14,12 +14,12 @@ Time and Space Complexity
  size                                       Theta(1)
  is-empty                                   Theta(1)
 """
-from Item import Item
+
 
 class MinPQ:
     
     def __init__(self):
-        """ initializes and empty priority queue"""
+        """ initializes an empty priority queue"""
         self.pq = []
         self.build_heap(self.pq)
     
