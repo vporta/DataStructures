@@ -10,9 +10,9 @@ class Board:
     board = []
 
     def __init__(self, tiles):
-        self.n = len(tiles[0])
+        self.n = 3
         self.tiles = tiles
-        self.board = [0 for _ in range(self.n) for j in range(self.n)]
+        self.board = [[]*self.n]
         self.q = Queue()
         for i in range(self.n):
             for j in range(self.n):
