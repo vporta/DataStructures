@@ -54,7 +54,7 @@ class SymbolTable:
 # For testing.
 
 def main():
-    import stdio
+    from HashTables import stdio
 
     # Test the constructor.
     st = SymbolTable()

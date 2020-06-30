@@ -1,7 +1,7 @@
 """
-Queue.py 
+Queues.py
 A generic queue. 
-*  The {@code Queue} class represents a first-in-first-out (FIFO)
+*  The {@code Queues} class represents a first-in-first-out (FIFO)
  *  queue of generic items.
  *  It supports the usual <em>enqueue</em> and <em>dequeue</em>
  *  operations, along with methods for peeking at the first item,
@@ -52,7 +52,7 @@ class Queue:
         self.n += 1
 
     def dequeue(self):
-        if self.is_empty(): raise Exception('Queue underflow')
+        if self.is_empty(): raise Exception('Queues underflow')
         item = self.first._item 
         self.first = self.first._next 
         self.n -= 1 
@@ -60,7 +60,7 @@ class Queue:
         return item 
 
     def __repr__(self):
-        return f"<Queue(first={self.first}, last={self.last}, n={self.n})>"
+        return f"<Queues(first={self.first}, last={self.last}, n={self.n})>"
 
     def __iter__(self):
         a = []

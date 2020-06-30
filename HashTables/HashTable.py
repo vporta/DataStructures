@@ -1,6 +1,6 @@
 """
-hash_table.py. 
-@description The hash_table.py module defines a class, HashTable. 
+HashTable.py.
+@description The HashTable.py module defines a class, HashTable.
 @author Vincent Porta. 
 
 #-------------------------------------------------

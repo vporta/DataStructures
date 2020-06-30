@@ -36,7 +36,7 @@ class MinPQ:
 
     def min(self):
         """ Returns a smallest key on this priority queue."""
-        if self.is_empty(): raise Exception('Priority Queue underflow.')
+        if self.is_empty(): raise Exception('Priority Queues underflow.')
         return self.pq[1]
     
     def insert(self, x):
@@ -46,7 +46,7 @@ class MinPQ:
 
     def del_min(self):
         """ Removes and returns a smallest key on this priority queue"""
-        if self.is_empty(): raise Exception('Priority Queue underflow.')
+        if self.is_empty(): raise Exception('Priority Queues underflow.')
         _min = self.min()
         self.pq[1] = self.pq[len(self)]
         self.pq.pop()

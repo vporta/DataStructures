@@ -3,9 +3,9 @@ Solver.py
 class Solver, finds a solution to the initial board
 """
 from typing import *
-from Queue.EightPuzzle.Board import Board
+from Queues.EightPuzzle.Board import Board
 from collections import deque
-from Queue.MinPQ import MinPQ
+from Queues.MinPQ import MinPQ
 from heapq import *
 
 # initial state is the initial board, 0 moves, None previous state

@@ -4,11 +4,13 @@ stdarray.py
 The stdarray module defines functions related to creating, reading,
 and writing one- and two-dimensional arrays.
 """
-import stdio 
+from . import stdio
 
-#=======================================================================
+
+# =======================================================================
 # Array creation functions
-#=======================================================================
+# =======================================================================
+
 
 def create1D(length, value=None):
     """
@@ -17,7 +19,8 @@ def create1D(length, value=None):
     """
     return [value] * length
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def create2D(row_count, col_count, value=None):
     """
@@ -25,13 +28,14 @@ def create2D(row_count, col_count, value=None):
     columns, with each element initialized to value.
     """
     a = [None] * row_count
-    for row in range(row_count):        
+    for row in range(row_count):
         a[row] = [value] * col_count
     return a
 
-#=======================================================================
+
+# =======================================================================
 # Array writing functions
-#=======================================================================
+# =======================================================================
 
 def write1D(a):
     """
@@ -47,13 +51,14 @@ def write1D(a):
             if element == True:
                 stdio.write(1)
             else:
-                stdio.write(0) 
+                stdio.write(0)
         else:
             stdio.write(element)
         stdio.write(' ')
     stdio.writeln()
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def write2D(a):
     """
@@ -65,7 +70,7 @@ def write2D(a):
     stdio.writeln(str(row_count) + ' ' + str(col_count))
     for row in range(row_count):
         for col in range(col_count):
-            #stdio.writef('%9.5f ', a[row][col])
+            # stdio.writef('%9.5f ', a[row][col])
             element = a[row][col]
             if isinstance(element, bool):
                 if element == True:
@@ -77,9 +82,10 @@ def write2D(a):
             stdio.write(' ')
         stdio.writeln()
 
-#=======================================================================
+
+# =======================================================================
 # Array reading functions
-#=======================================================================
+# =======================================================================
 
 def readInt1D():
     """
@@ -92,7 +98,8 @@ def readInt1D():
         a[i] = stdio.readInt()
     return a
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def readInt2D():
     """
@@ -108,7 +115,8 @@ def readInt2D():
             a[row][col] = stdio.readInt()
     return a
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def readFloat1D():
     """
@@ -121,7 +129,8 @@ def readFloat1D():
         a[i] = stdio.readFloat()
     return a
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def readFloat2D():
     """
@@ -137,7 +146,8 @@ def readFloat2D():
             a[row][col] = stdio.readFloat()
     return a
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def readBool1D():
     """
@@ -150,7 +160,8 @@ def readBool1D():
         a[i] = stdio.readBool()
     return a
 
-#-----------------------------------------------------------------------
+
+# -----------------------------------------------------------------------
 
 def readBool2D():
     """
@@ -166,7 +177,8 @@ def readBool2D():
             a[row][col] = stdio.readBool()
     return a
 
-#=======================================================================
+
+# =======================================================================
 
 def _main():
     """
@@ -175,6 +187,6 @@ def _main():
     write2D(readFloat2D())
     write2D(readBool2D())
 
+
 if __name__ == '__main__':
     _main()
-
