@@ -30,11 +30,25 @@ class DepthFirstPaths:
         :param g: g the graph
         :param s: s the source vertex
         """
-        self.s = s 
-        self.edge_to = [0 for _ in range(g.get_V())]
-        self.marked = [False for _ in range(g.get_V())]
+        self._g = g
+        self._s = s
+        self._edge_to = [0 for _ in range(g.get_V())]
+        self._marked = [False for _ in range(g.get_V())]
         self._validate_vertex(s)
+        # self.__non_recursive(g, s)
         self._dfs(g, s)
+
+    def get_g(self):
+        return self._g
+
+    def get_s(self):
+        return self._s
+
+    def get_edge_to(self):
+        return self._edge_to
+
+    def get_marked(self):
+        return self._marked
 
     def _dfs(self, g, v):
         """
@@ -42,10 +56,10 @@ class DepthFirstPaths:
         :param g: g the graph
         :param v: v the source vertex
         """
-        self.marked[v] = True 
+        self.get_marked()[v] = True
         for w in g.adj_vertices(v):
-            if not self.marked[w.item]:
-                self.edge_to[w.item] = v
+            if not self.get_marked()[w.item]:
+                self.get_edge_to()[w.item] = v
                 self._dfs(g, w.item)
 
     def has_path_to(self, v):
@@ -55,7 +69,7 @@ class DepthFirstPaths:
         :returns: True if there is a path, False otherwise
         """
         self._validate_vertex(v)
-        return self.marked[v]
+        return self.get_marked()[v]
 
     def path_to(self, v):
         """
@@ -66,21 +80,38 @@ class DepthFirstPaths:
         self._validate_vertex(v)
         if not self.has_path_to(v):
             return None
-        path = deque()  # acts as a stack. Holds integers
+        path = deque()  # acts as a stack. Holds integer vertices
         x = v 
-        while x != self.s:
+        while x != self.get_s():
             path.append(x)
-            x = self.edge_to[x]
-        path.append(self.s)
+            x = self.get_edge_to()[x]
+        path.append(self.get_s())
         return list(path)
 
     def _validate_vertex(self, v):
-        marked_len = len(self.marked)
+        marked_len = len(self.get_marked())
         if v < 0 or v >= marked_len:
-            raise ValueError(f'vertex {v} is not between 0 and {marked_len-1}')
+            raise AttributeError(f'vertex {v} is not between 0 and {marked_len-1}')
+
+    def __non_recursive(self, g, s):
+        self._validate_vertex(s)
+        stack = deque()
+        self.get_marked()[s] = True
+        stack.append(s)
+        while stack:
+            v = stack.pop()
+            for w in g.adj[v]:
+                if w.next is not None:
+                    w = w.next
+                    if not self.get_marked()[w.item]:
+                        self.get_marked()[w.item] = True
+                        self.get_edge_to()[w.item] = v
+                        stack.append(w.item)
+                else:
+                    stack.pop()
 
     def __repr__(self):
-        return f'<DepthFirstPaths(s = {self.s}, marked={self.marked}, edge_to = {self.edge_to})>'
+        return f'<DepthFirstPaths(s = {self.get_s()}, marked={self.get_marked()}, edge_to = {self.get_edge_to()})>'
 
 
 def main():

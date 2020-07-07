@@ -14,7 +14,7 @@ class Graph:
         :param v: the number of vertices
         """
         if v < 0:
-            raise ValueError('Number of vertices must be nonnegative')
+            raise ValueError('Number of vertices must be non-negative')
         self.V = v + 1
         self.E = 0
         # self.adj = defaultdict(deque)  /* without LinkedList */
@@ -76,7 +76,7 @@ def main():
     g.add_edge(1, 2)
     g.add_edge(2, 3)
     print(g)
-    print(g.number_of_V())
+    print(g.get_V())
     print(f'adjacent vertices of 2 are: {g.adj_vertices(2)}')
     print(f'degree of 2 is: {g.degree(2)}')
 

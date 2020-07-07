@@ -32,7 +32,11 @@ class DepthFirstSearch:
         """
         self._marked = [False for _ in range(g.get_V())]
         self.__validate_vertex(s)
+        self.g = g
         self.__dfs(g, s)
+
+    def get_g(self):
+        return self.g
 
     def __dfs(self, g, v):
         """
