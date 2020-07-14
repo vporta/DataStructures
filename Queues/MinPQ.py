@@ -36,7 +36,8 @@ class MinPQ:
 
     def min(self):
         """ Returns a smallest key on this priority queue."""
-        if self.is_empty(): raise Exception('Priority Queues underflow.')
+        if self.is_empty():
+            raise Exception('Priority Queues underflow.')
         return self.pq[1]
     
     def insert(self, x):
@@ -110,10 +111,13 @@ class MinPQ:
 
     def is_min_heap_ordered(self, i):
         n = len(self) 
-        if i > n: return True 
+        if i > n:
+            return True
         left, right = 2 * i, 2 * i + 1 
-        if left <= n and self.greater(i, left): return False 
-        if right <= n and self.greater(i, right): return False 
+        if left <= n and self.greater(i, left):
+            return False
+        if right <= n and self.greater(i, right):
+            return False
         return self.is_min_heap_ordered(left) and self.is_min_heap_ordered(right)
 
     def __repr__(self):

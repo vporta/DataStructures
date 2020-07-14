@@ -23,7 +23,7 @@ class Queue:
             self._next = _next
 
         def __repr__(self):
-            return return f"<_Node(_item={self._item}, _next={self._next})>"
+            return f"<_Node(_item={self._item}, _next={self._next})>"
 
     def __init__(self, first=None, last=None):
         self.first = first 
@@ -81,7 +81,10 @@ def main():
     print(queue.size())
     for i in queue:
         print(i.first._item)
-main()
+
+
+if __name__ == '__main__':
+    main()
 
 
 

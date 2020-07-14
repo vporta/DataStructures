@@ -33,7 +33,7 @@ from collections import defaultdict
 import random
 
 
-class EdgeWeightDigraph:
+class EdgeWeightedDigraph:
 
     def __init__(self, v):
         """
@@ -46,8 +46,8 @@ class EdgeWeightDigraph:
         self.E = 0
         self._indegree = [0 for _ in range(v)]
         self.adj = defaultdict(Bag)
-        for v in range(v):
-            self.adj[v] = Bag()
+        for i in range(v):
+            self.adj[i] = Bag()
 
     # Initializes a random edge-weighted digraph
     # def __init__(self, v, e):
@@ -135,18 +135,18 @@ class EdgeWeightDigraph:
                f'E={self.get_E()}, ' \
                f'adj={self.adj})>'
 
-    def __str__(self):
-        s = f'{self.get_V()} {self.get_E()}\n'
-        for v in range(self.get_V()):
-            s += f'{v}: '
-            for e in self.adj_vertices(v):
-                s += f'{e} '
-            s += '\n'
-        return s
+    # def __str__(self):
+    #     s = f'{self.get_V()} {self.get_E()}\n'
+    #     for v in range(self.get_V()):
+    #         s += f'{v}: '
+    #         for e in self.adj_vertices(v):
+    #             s += f'{e} '
+    #         s += '\n'
+    #     return s
 
 
 def main():
-    g = EdgeWeightDigraph(8)
+    g = EdgeWeightedDigraph(8)
     with open("../resources/tinyEWD.txt", ) as f:
         for line in f.readlines():
             vertices = " ".join(line.splitlines()).split(' ')

@@ -12,12 +12,12 @@ import math
 
 class DirectedEdge:
 
-    def __init__(self, v, w, weight):
+    def __init__(self, v=0, w=0, weight=0.0):
         if v < 0:
             raise AttributeError('Vertex names must be nonnegative integers')
         if w < 0:
             raise AttributeError('Vertex names must be nonnegative integers')
-        if math.isnan(float(weight)):
+        if math.isnan(weight):
             raise AttributeError('Weight is NaN')
         self._v = v
         self._w = w

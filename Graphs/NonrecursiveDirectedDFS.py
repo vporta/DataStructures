@@ -5,7 +5,6 @@ Run nonrecurisve depth-first search on an directed graph.
 """
 from Graphs.Digraph import Digraph
 from collections import deque
-import sys
 
 
 class NonrecursiveDirectedDFS:
