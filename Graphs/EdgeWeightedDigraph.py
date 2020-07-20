@@ -135,14 +135,14 @@ class EdgeWeightedDigraph:
                f'E={self.get_E()}, ' \
                f'adj={self.adj})>'
 
-    # def __str__(self):
-    #     s = f'{self.get_V()} {self.get_E()}\n'
-    #     for v in range(self.get_V()):
-    #         s += f'{v}: '
-    #         for e in self.adj_vertices(v):
-    #             s += f'{e} '
-    #         s += '\n'
-    #     return s
+    def __str__(self):
+        s = f'v={self.get_V()}, e={self.get_E()}\n'
+        for v in range(self.get_V()):
+            s += f'{v}: '
+            for e in self.adj_vertices(v):
+                s += f'{e} '
+            s += '\n'
+        return s
 
 
 def main():

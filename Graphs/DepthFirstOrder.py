@@ -23,8 +23,8 @@ class DepthFirstOrder:
     _pre_counter, _post_counter = 0, 0
 
     def __init__(self, g):
-        self._pre = [0 for _ in range(g.get_V())]
-        self._post = [0 for _ in range(g.get_V())]
+        self._pre = [0 for _ in range(g.get_V())]  # pre[v]    = preorder  number of v
+        self._post = [0 for _ in range(g.get_V())]  # post[v]   = postorder number of v
         self._postorder = Queue()  # queue
         self._preorder = Queue()  # queue
         self._marked = [False for _ in range(g.get_V())]
@@ -48,13 +48,17 @@ class DepthFirstOrder:
             self._post[v] = self._post_counter
         else:
             self._marked[v] = True
+            #  Preorder: Put the vertex on a queue before the recursive calls
             self._pre_counter += 1
             self._pre[v] = self._pre_counter
             self._preorder.put(v)
             for e in g.adj_vertices(v):
+                #       tail()   weight        head()
+                # e  =   v   -------------->   w
                 w = e.head()
                 if not self._marked[w.item]:
                     self.__dfs(g, w.item)
+            # Postorder: Put the vertex on a queue after the recursive calls.
             self._postorder.put(v)
             self._post_counter += 1
             self._post[v] = self._post_counter
@@ -79,6 +83,7 @@ class DepthFirstOrder:
             raise ValueError(f'vertex {v} is not between 0 and {n - 1}')
 
     def reverse_post(self):
+        # Reverse postorder: Put the vertex on a stack after the recursive calls.
         reverse = LifoQueue()  # stack
         for v in self.postorder_vertices():
             reverse.put(v)

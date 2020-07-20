@@ -103,10 +103,13 @@ class MinPQ:
     def is_min_heap(self):
         pq, n = self.pq, len(self)
         for i in range(n):
-            if pq[i] is None: return False 
+            if pq[i] is None:
+                return False
         for i in range(n+1, len(pq)):
-            if pq[i] is not None: return False 
-        if pq[1] is not None: return False 
+            if pq[i] is not None:
+                return False
+        if pq[1] is not None:
+            return False
         return self.is_min_heap_ordered(1)
 
     def is_min_heap_ordered(self, i):
@@ -121,26 +124,27 @@ class MinPQ:
         return self.is_min_heap_ordered(left) and self.is_min_heap_ordered(right)
 
     def __repr__(self):
-        return f'<MinPQ(pq={self.pq}, n={len(self)})>'
+        return f'<{self.__class__.__name__}(pq={self.pq}, n={len(self)})>'
 
     def __iter__(self):
         yield from self.pq
 
-# def main():
-#     keys = [9, 5, 6, 2, 3]
-#     pq = MinPQ()
+
+def main():
+    keys = [9, 5, 6, 2, 3]
+    pq = MinPQ()
    
-#     for key in keys:
-#         print(key)
-#         pq.insert(key)
-#         if not pq.is_empty(): print(pq.del_min(), ' ')
-#         print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
-#     print(pq)
-#     print(f'( {pq.size()} left on pq.')
+    for key in keys:
+        print(key)
+        pq.insert(key)
+        if not pq.is_empty(): print(pq.del_min(), ' ')
+        print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
+    print(pq)
+    print(f'( {pq.size()} left on pq.')
 
 
-# if __name__ == '__main__':
-#     print(main())
+if __name__ == '__main__':
+    print(main())
 
 
 

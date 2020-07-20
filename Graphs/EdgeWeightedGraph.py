@@ -91,6 +91,15 @@ class EdgeWeightedGraph:
                f'adj={self.adj})>,' \
                f'edges={self.edges()}'
 
+    def __str__(self):
+        s = f'\n    v={self.get_V()},\n    e={self.get_E()},\n'
+        for v in range(self.get_V()):
+            s += f'     {v}: '
+            for e in self.adj_vertices(v):
+                s += f'     {e} '
+            s += '\n'
+        return s
+
 
 def main():
     with open("../resources/tinyEWG.txt", ) as f:

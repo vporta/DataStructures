@@ -8,18 +8,18 @@ class Heap:
         # O(1)
         if index == 0:
             return None, None
-        parent_index =  (index - 1) // 2
+        parent_index = (index - 1) // 2
         # return parent index and value
         return parent_index, self.__array[parent_index]
 
     def push(self, value):
-        # Big O(logn)
+        # O(log n)
         self.__array.append(value)
         self.__last_index += 1
         self.__siftup(self.__last_index)
 
     def pop(self):
-        # Big O(logn)
+        # O(log n)
         if self.__last_index == -1:
             raise IndexError("Can't pop from empty heap")
         root_value = self.__array[0]
@@ -76,7 +76,7 @@ class Heap:
 
     def peek(self):
         if not self.__array:
-            return None 
+            return None
         return self.__array[0]
 
     def replace(self, new_value):
@@ -107,9 +107,9 @@ class Heap:
 
     @classmethod
     def build_heap(cls, input_list):
-        # O(nlogn) upper bound. 
+        # O(n log n) upper bound.
         # Asymptotically tight is O(n)
-        """ Create a heap based on an inputed list. """
+        """ Create a heap based on an inputted list. """
         heap = cls()
         heap.heapify(input_list)
         return heap
@@ -121,11 +121,11 @@ class Heap:
         left = self.__get_left_child(index)
         right = self.__get_right_child(index)
 
-        if left < n and self.__array[i] < self.__array[left]:
-            largest = left 
+        if left < n and self.__array[largest] < self.__array[left]:
+            largest = left
 
         if right < n and self.__array[largest] < self.__array[right]:
-            largest = right 
+            largest = right
 
         if largest != index:
             self.__array[largest], self.__array[index] = self.__array[index], self.__array[largest]
@@ -135,14 +135,14 @@ class Heap:
         n = len(arr)
         for i in range(n, -1, -1):
             self.__max_heapify(arr, n, i)
-        for i in range(n-1, 0, -1):
+        for i in range(n - 1, 0, -1):
             arr[i], arr[0] = arr[0], arr[i]
             self.__max_heapify(arr, i, 0)
         print(arr)
         return arr
 
     def __repr__(self):
-        return str(self.__array[:self.__last_index+1])
+        return str(self.__array[:self.__last_index + 1])
 
     def __eq__(self, other):
         if isinstance(other, Heap):
@@ -156,36 +156,32 @@ class MinHeap(Heap):
     def compare(self, value1, value2):
         return value1 < value2
 
+
 class MaxHeap(Heap):
     def compare(self, value1, value2):
         return value1 > value2
 
-minh = MinHeap.build_heap([2,7,3,1,9,44,23]) == [1, 2, 3, 7, 9, 44, 23]
-maxh = MaxHeap.build_heap([2,7,3,1,9,44,23]) == [44, 9, 23, 1, 7, 3, 2]
+
+minh = MinHeap.build_heap([2, 7, 3, 1, 9, 44, 23]) == [1, 2, 3, 7, 9, 44, 23]
+maxh = MaxHeap.build_heap([2, 7, 3, 1, 9, 44, 23]) == [44, 9, 23, 1, 7, 3, 2]
 
 # print(minh, maxh)
 
 from hypothesis import given, assume
 import hypothesis.strategies as st
 
+
 @given(st.lists(st.integers()))
 def test_minheap(l):
     h = MinHeap.build_heap(l)
     s = sorted(l)
     for i in range(len(s)):
-        assert(h.pop() == s[i])
+        assert (h.pop() == s[i])
+
 
 @given(st.lists(st.integers()))
 def test_maxheap(l):
     h = MaxHeap.build_heap(l)
     s = sorted(l, reverse=True)
     for i in range(len(s)):
-        assert(h.pop() == s[i])
-
-
-      
-
-
-
-
-
+        assert (h.pop() == s[i])

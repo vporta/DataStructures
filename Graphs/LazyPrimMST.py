@@ -1,7 +1,7 @@
 """
-KruskalMST.py
-Compute a minimum spanning forest using Kruskal's algorithm.
-The KruskalMST class represents a data type for computing a
+LazyPrimMST.py
+ *  Compute a minimum spanning forest using a lazy version of Prim's Algorithm
+The LazyPrimMST class represents a data type for computing a
  *  minimum spanning tree in an edge-weighted graph.
  *  The edge weights can be positive, zero, or negative and need not
  *  be distinct. If the graph is not connected, it computes a minimum
@@ -10,42 +10,66 @@ The KruskalMST class represents a data type for computing a
  *  weight of a minimum spanning tree and the edges() method
  *  returns its edges.
  *
- *  This implementation uses Krusal's algorithm and the
- *  union-find data type.
+ *  This implementation uses a lazy version of Prim's algorithm
+ *  with a binary heap of edges.
+
  *  The constructor takes Theta(E log E) time in
- *  the worst case.
+ *  the worst case, where V is the number of vertices and
+ *  E is the number of edges.
  *  Each instance method takes Theta(1) time.
- *  It uses Theta(E) extra space (not including the graph).
+ *  It uses Theta(E) extra space in the worst case
+ *  (not including the edge-weighted graph).
 """
-import heapq
+from heapq import *
 from Graphs.Edge import Edge
 from Graphs.EdgeWeightedGraph import EdgeWeightedGraph
 from queue import Queue
+
 from UnionFindAlgorithms.UF import UF
 
 
-class KruskalMST:
+class LazyPrimMST:
+
     FLOATING_POINT_EPSILON = 1E-12
     _weight = 0
-    _mst = Queue()
 
     def __init__(self, g: EdgeWeightedGraph):
-        self._pq = list()  # min priority queue in ascending order of Edge weights
-        for e in g.edges():
-            heapq.heappush(self._pq, e.item)
-        uf = UF(g.get_V())
-        # 1. Consider edges in ascending order of edge weight (sort weights).
-        # 2. Add the next Edge, e, to tree, _mst, unless doing so would create a cycle.
-        while self._pq and self._mst.qsize() < g.get_V() - 1:
-            e = heapq.heappop(self._pq)
-            v = e.either()
-            w = e.other(v)
-            if not uf.connected(v, w):  # no cycle because v-w are not in the same set
-                uf.union(v, w)  # merge sets containing v-w to add v-w to _mst
-                self._mst.put(e)
-                self._weight += e.weight()
+        self._g = g
+        self._mst = Queue()
+        self._pq = list()
+        self._marked = [False] * g.get_V()
+        for v in range(g.get_V()):
+            if not self._marked[v]:
+                self.__prim(g, v)
 
         assert self.__check(g)
+
+    def __prim(self, g, s):
+        self.__scan(g, s)  # marked vertices as visited and populated pq w/ every edge v-w (w not visited) incident to v
+        while self._pq:
+            e = heappop(self._pq)
+            print(e)
+            v = e.either()
+            w = e.other(v)
+            assert self._marked[v] or self._marked[w]
+            # disregard if both endpoints are in tree already i.e. "Lazy"
+            if self._marked[v] and self._marked[w]:
+                continue
+            # otherwise let w be the vertex not in tree
+            self._mst.put(e)
+            self._weight += e.weight()
+            if not self._marked[v]:
+                self.__scan(g, v)  # v becomes part of the tree
+            if not self._marked[w]:
+                self.__scan(g, w)  # w becomes part of the tree
+
+    def __scan(self, g, v):
+        assert not self._marked[v]
+        self._marked[v] = True
+        for e in g.adj_vertices(v):
+            w = e.item.other(v)
+            if not self._marked[w]:
+                heappush(self._pq, e.item)
 
     def edges(self):
         return self._mst.queue
@@ -57,7 +81,7 @@ class KruskalMST:
         total = 0.0
         for e in self.edges():
             total += e.weight()
-        if abs(total - self.weight()) > KruskalMST.FLOATING_POINT_EPSILON:
+        if abs(total - self.weight()) > LazyPrimMST.FLOATING_POINT_EPSILON:
             print(f'Weight of edges does not equal weight(): {total} vs {self.weight()}')
             return False
 
@@ -96,9 +120,10 @@ class KruskalMST:
         return True
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}(_pq={self._pq}, weight={self.weight()}, _mst={self._mst.queue})>'
-
-
+        return f'<{self.__class__.__name__}(' \
+               f'_pq={self._pq}, ' \
+               f'_marked={self._marked}' \
+               f'_mst={self._mst.queue})>'
 
 
 def main():
@@ -112,19 +137,11 @@ def main():
             e = Edge(v, w, weight)
             g.add_edge(e)
     print(g)
-    mst = KruskalMST(g)
+    mst = LazyPrimMST(g)
     print(mst)
+    for e in mst.edges():
+        print(e)
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
