@@ -68,16 +68,5 @@ def main():
     dijkstra = DijkstraAllPairsSP(g)
     print(dijkstra)
 
-    # for t in range(g.get_V()):
-    #     if dijkstra.has_path_to(t):
-    #         print(f'{s} to {t} ({dijkstra.dist_to(t)})')
-    #         q = dijkstra.path_to(t)
-    #         while not q.empty():
-    #             print(q.get())
-    #         print()
-    #     else:
-    #         print(f'{s} to {t} no path\n')
-
-
 if __name__ == '__main__':
     main()

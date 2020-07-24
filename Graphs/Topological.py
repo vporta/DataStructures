@@ -27,8 +27,12 @@ from Graphs.SymbolDigraph import SymbolDigraph
 
 class Topological:
 
+    _order = None
+    _rank = None
+
     def __init__(self, g):
         if isinstance(g, Digraph):
+            print('g is a Digraph')
             finder = DirectedCycle(g)
             if not finder.has_cycle():
                 dfs = DepthFirstOrder(g)
@@ -38,8 +42,10 @@ class Topological:
                 for v in self._order:
                     i += 1
                     self._rank[v] = i
-        else:
+        if isinstance(g, EdgeWeightedDigraph):
+            print('g is an EdgeWeightedDigraph')
             finder = EdgeWeightedDirectedCycle(g)
+            print(finder)
             if not finder.has_cycle():
                 dfs = DepthFirstOrder(g)
                 self._order = dfs.reverse_post()
@@ -63,7 +69,7 @@ class Topological:
             raise ValueError(f'vertex {v} is not between 0 and {n - 1}')
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}(_order={self._order}, _rank={self._rank})>'
+        return f'<{self.__class__.__name__}(_order={self.order()}, _rank={self._rank})>'
 
 
 def main():
@@ -73,6 +79,7 @@ def main():
     print(topological)
     for v in topological.order():
         print(sg.name_of(v))
+
 
 if __name__ == '__main__':
     main()

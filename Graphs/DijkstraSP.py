@@ -34,14 +34,16 @@ class DijkstraSP:
         self._dist_to = [math.inf] * g.get_V()
         self._dist_to[s] = 0.0
         self._spt = [False] * g.get_V()
-
+        self._on_queue = [False] * g.get_V()
         self.__validate_vertex(s)
 
         self._pq = list()
         heapq.heappush(self._pq, (self._dist_to[s], s))
+        self._on_queue[s] = True
 
         while len(self._pq) > 0:
             current_distance, v = heapq.heappop(self._pq)
+            self._on_queue[v] = False
             for e in g.adj_vertices(v):
                 self.__relax(e)
 
@@ -53,7 +55,9 @@ class DijkstraSP:
             # then update dist_to[w] and edge_to[w]
             self._dist_to[w] = self._dist_to[v] + e.item.weight()
             self._edge_to[w] = e.item
-            if w in [k for v, k in self._pq]:
+
+            if self._on_queue[w]:
+                # decrease-key: heapq._siftdown(pq, startpos, pos)
                 print(w, self._pq)
             else:
                 heapq.heappush(self._pq, (self._dist_to[w], w))

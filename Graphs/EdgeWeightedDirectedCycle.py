@@ -11,12 +11,13 @@ from queue import LifoQueue
 
 class EdgeWeightedDirectedCycle:
 
-    _cycle = None
+
 
     def __init__(self, g):
         self._marked = [False for _ in range(g.get_V())]
         self._on_stack = [False for _ in range(g.get_V())]
         self._edge_to = [DirectedEdge() for _ in range(g.get_V())]
+        self._cycle = None
         for v in range(g.get_V()):
             if not self._marked[v]:
                 self.__dfs(g, v)

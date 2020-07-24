@@ -15,7 +15,6 @@ Compute preorder and postorder for a digraph or edge-weighted digraph.
 from Graphs.DirectedEdge import DirectedEdge
 from Graphs.Digraph import Digraph
 from Graphs.EdgeWeightedDigraph import EdgeWeightedDigraph
-from collections import deque
 from queue import Queue, LifoQueue
 
 
@@ -55,9 +54,9 @@ class DepthFirstOrder:
             for e in g.adj_vertices(v):
                 #       tail()   weight        head()
                 # e  =   v   -------------->   w
-                w = e.head()
-                if not self._marked[w.item]:
-                    self.__dfs(g, w.item)
+                w = e.item.head()
+                if not self._marked[w]:
+                    self.__dfs(g, w)
             # Postorder: Put the vertex on a queue after the recursive calls.
             self._postorder.put(v)
             self._post_counter += 1
@@ -147,11 +146,11 @@ def main():
     for v in dfs.postorder_vertices():
         print(f'{v} ', end="")
     print()
+    print(dfs.postorder_vertices())
     print('Reverse Post-order')
     q1 = dfs.reverse_post()
     for v in q1:
         print(f'{v} ', end="")
-
 
 
 if __name__ == '__main__':
