@@ -2,6 +2,7 @@
 # Time complexity 
 # Worst case Theta(N * M)
 
+
 def str_search(pattern, text):
     """
     if pattern exists in text, return index where pattern starts. 
@@ -20,6 +21,7 @@ def str_search(pattern, text):
         if j == M: return i 
         i += 1
     return N
+
 
 def str_search_two(pattern, text):
     """
@@ -47,4 +49,5 @@ def main():
     print(str_search_two('ADACR', 'ABACADABRAC'))
     print(str_search_two('IN', 'VINCENT'))
 
-main()
+if __name__ == '__main__':
+    main()

@@ -80,4 +80,5 @@ def main():
     print(f'adjacent vertices of 2 are: {g.adj_vertices(2)}')
     print(f'degree of 2 is: {g.degree(2)}')
 
-# main()
+if __name__ == '__main__':
+    main()

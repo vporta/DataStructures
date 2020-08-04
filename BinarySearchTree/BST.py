@@ -134,7 +134,8 @@ class BST:
         return self._minimum(self.root).value
 
     def _minimum(self, node):
-        if node.left is None: return node
+        if node.left is None:
+            return node
         return self._minimum(node.left)
 
         # alternative iterative approach:
@@ -148,7 +149,8 @@ class BST:
         return self._maximum(self.root).value
 
     def _maximum(self, node):
-        if node.right is None: return node
+        if node.right is None:
+            return node
         return self._maximum(node.right)
 
     def predecessor(self, value):

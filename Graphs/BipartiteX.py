@@ -20,10 +20,11 @@ The Bipartite class represents a data type for
 """
 from Graphs.Graph import Graph
 from collections import deque
+from queue import Queue, LifoQueue
 
 
 class BipartiteX:
-    _cycle = deque()
+    _cycle = Queue()
     WHITE = False
     BLACK = True
 
@@ -36,9 +37,11 @@ class BipartiteX:
         self._color = [False for _ in range(g.get_V())]
         self._marked = [False for _ in range(g.get_V())]
         self._edge_to = [0 for _ in range(g.get_V())]
-        for v in range(g.get_V()) and self.__is_bipartite():
-            if not self._marked[v]:
-                self.__bfs(g, v)
+        print(self.__is_bipartite())
+        for v in range(g.get_V()):
+            if self.__is_bipartite():
+                if not self._marked[v]:
+                    self.__bfs(g, v)
 
         assert self.__check(g)
 
@@ -65,37 +68,37 @@ class BipartiteX:
         return
 
     def __bfs(self, g, s):
-        q = deque()  # the queue
+        q = Queue()  # the queue
         self.get_color()[s] = BipartiteX.WHITE
         self.get_marked()[s] = True  # mark vertex as visited
-        q.appendleft(s)
-        while q:
-            v = q.pop()
+        q.put(s)
+        while not q.empty():
+            v = q.get()
             for w in g.adj_vertices(v):
                 # found uncolored vertex, so recur
-                if not self.get_marked()[w]:
-                    self.get_marked()[w] = True
-                    self.get_edge_to()[w] = v
-                    self.get_color()[w] = not self.get_color()[v]
-                    q.appendleft(w)
+                if not self.get_marked()[w.item]:
+                    self.get_marked()[w.item] = True
+                    self.get_edge_to()[w.item] = v
+                    self.get_color()[w.item] = not self.get_color()[v]
+                    q.put(w.item)
                 # if v-w create an odd-length cycle, find it
-                elif self.get_color()[w] == self.get_color()[v]:
-                    self.__set_is_bipartite(False)
+                elif self.get_color()[w.item] == self.get_color()[v]:
+                    self._is_bipartite = False
                     # to form odd cycle, consider s-v path and s-w path
                     # and let x be closest node to v and w common to two paths
                     # then (w-x path) + (x-v path) + (edge v-w) is an odd-length cycle
                     # Note: dist_to[v] == dist_to[w]
-                    stack = deque()
+                    stack = LifoQueue()
                     x, y = v, w
                     while x != y:
-                        stack.append(x)
-                        self.get_cycle().appendleft(y)
+                        stack.put(x)
+                        self._cycle.put(y)
                         x = self.get_edge_to()[x]
                         y = self.get_edge_to()[y]
-                    stack.append(x)
-                    while stack:
-                        self.get_cycle().appendleft(stack.pop())
-                    self.get_cycle().appendleft(w)
+                    stack.put(x)
+                    while not stack.empty():
+                        self._cycle.put(stack.get())
+                    self._cycle.put(w)
                     return
 
     def __is_bipartite(self):
@@ -112,16 +115,16 @@ class BipartiteX:
 
     def __check(self, g):
         if self.get_is_bipartite():
-            for v in range(g.get_V):
+            for v in range(g.get_V()):
                 for w in g.adj_vertices(v):
-                    if self.get_color()[v] == self.get_color()[w]:
+                    if self.get_color()[v] == self.get_color()[w.item]:
                         print(
                             f'edge {v}-{w} with {v} and {w} in same side of '
                             f'bi-partition\n')
                         return False
         else:
             first, last = -1, -1
-            for v in self.odd_cycle():
+            for v in self.odd_cycle().queue:
                 if first == -1:
                     first = v
                 last = v
