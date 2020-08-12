@@ -18,6 +18,8 @@ trie (TST).
  *  values cannot be null—setting the
  *  value associated with a key to null is equivalent to deleting the key
  *  from the symbol table.
+ *  Typical case take Theta(L + Ln * N) for search hit and insert; Theta(Ln * N) for a search miss.
+ *  Space takes Theta(4N)
 """
 from queue import Queue
 
@@ -62,6 +64,8 @@ class TST:
         if len(key) == 0:
             raise AttributeError('key must have length >= 1')
         c = ord(key[d])
+
+        # see __put() for explanation
         if c < x.c:
             return self.__get(x.left, key, d)
         elif c > x.c:
@@ -85,12 +89,20 @@ class TST:
         if x is None:
             x = Node()
             x.c = c
+
+        # key char c comes before node char c. So go to the left
         if c < x.c:
             x.left = self.__put(x.left, key, val, d)
+
+        # key char c comes after node char c. So go to the right
         elif c > x.c:
             x.right = self.__put(x.right, key, val, d)
-        elif d < len(key) - 1:
+
+        # if char's are equal, test if we are on the last key
+        elif d < len(key) - 1:  # not on last key, go down the middle
             x.mid = self.__put(x.mid, key, val, d + 1)
+
+        # we're on the last char in the key. So reset the val
         else:
             x.val = val
         return x

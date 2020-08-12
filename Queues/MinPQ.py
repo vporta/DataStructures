@@ -17,95 +17,97 @@ Time and Space Complexity
 
 
 class MinPQ:
-    
-    def __init__(self):
+
+    def __init__(self, _max=1):
         """ initializes an empty priority queue"""
-        self.pq = []
-        self.build_heap(self.pq)
-    
-    def __len__(self):
-        return len(self.pq) - 1
+        self._pq = [None for _ in range(_max+1)]
+        # self.build_heap(self.pq)
+        self._n = 0
 
     def is_empty(self):
         """ Returns true if this priority queue is empty."""
-        return self.size() == 1 
+        return self._n == 0
 
     def size(self):
         """ Returns the number of keys on this priority queue."""
-        return len(self) 
+        return self._n
 
     def min(self):
         """ Returns a smallest key on this priority queue."""
         if self.is_empty():
             raise Exception('Priority Queues underflow.')
-        return self.pq[1]
-    
+        assert self._pq is not None
+        return self._pq[1]
+
     def insert(self, x):
         """ Adds a new item to this priority queue."""
-        self.pq.append(x)
-        self.swim()
+        if self._n == len(self._pq) - 1:
+            self.__resize(2 * len(self._pq))
+        self._n += 1
+        self._pq[self._n] = x
+        self.__swim(self._n)
 
     def del_min(self):
         """ Removes and returns a smallest key on this priority queue"""
-        if self.is_empty(): raise Exception('Priority Queues underflow.')
-        _min = self.min()
-        self.pq[1] = self.pq[len(self)]
-        self.pq.pop()
-        self.sink(1)
-        assert self.is_min_heap()
-        return _min 
+        if self.is_empty():
+            raise Exception('Priority Queues underflow.')
+        _min = self._pq[1]
+        assert _min is not None
+        self.exch(1, self._n)
+        self._n -= 1
+        self.__sink(1)
+        self._pq[self._n + 1] = None
+        if self._n > 0 and self._n == (len(self._pq) - 1) // 4:
+            self.__resize(len(self._pq) // 2)
+        return _min
 
-    def build_heap(self, alist):
-        i = len(alist) // 2
-        self.pq = [0] + alist
-        while i > 0:
-            self.sink(i)
-            i = i - 1
+    def __len__(self):
+        return self.size()
 
     # ***************************************************************************
     # * Helper functions to restore the heap invariant.
     # ***************************************************************************
 
-    def swim(self):
-        i = len(self)
-        while i // 2 > 0 and self.greater(i//2, i):
-            self.exch(i//2, i)
-            i = i//2
+    def __swim(self, i):
+        while i > 1 and self.greater(i // 2, i):
+            self.exch(i, i // 2)
+            i = i // 2
 
-    def sink(self, i):
-        while i * 2 <= len(self):
-            mc = self.min_child(i)
-            if self.greater(i, mc):
-                self.exch(i, mc)
-            i = mc
+    def __sink(self, i):
+        while i * 2 <= self._n:
+            j = 2 * i
 
-    def min_child(self, i):
-        if i * 2 + 1 > len(self):
-            return i * 2
-
-        if self.pq[i * 2] < self.pq[i * 2 + 1]:
-            return i * 2
-
-        return i * 2 + 1
+            if j < self._n and self.greater(j, j + 1):
+                j += 1
+            if not self.greater(i, j):
+                break
+            self.exch(i, j)
+            i = j
 
     # ***************************************************************************
     #  Helper functions for compares and swaps.
     # ***************************************************************************
 
     def greater(self, i, j):
-        pq = self.pq 
+        pq = self._pq
         return pq[i] > pq[j]
 
     def exch(self, i, j):
-        pq = self.pq
+        pq = self._pq
         pq[i], pq[j] = pq[j], pq[i]
-    
+
+    def __resize(self, capacity):
+        temp = [None] * capacity
+        for i in range(1, self._n + 1):
+            temp[i] = self._pq[i]
+        self._pq = temp
+
     def is_min_heap(self):
-        pq, n = self.pq, len(self)
+        pq, n = self._pq, len(self)
         for i in range(n):
             if pq[i] is None:
                 return False
-        for i in range(n+1, len(pq)):
+        for i in range(n + 1, len(pq)):
             if pq[i] is not None:
                 return False
         if pq[1] is not None:
@@ -113,10 +115,10 @@ class MinPQ:
         return self.is_min_heap_ordered(1)
 
     def is_min_heap_ordered(self, i):
-        n = len(self) 
+        n = len(self)
         if i > n:
             return True
-        left, right = 2 * i, 2 * i + 1 
+        left, right = 2 * i, 2 * i + 1
         if left <= n and self.greater(i, left):
             return False
         if right <= n and self.greater(i, right):
@@ -124,20 +126,27 @@ class MinPQ:
         return self.is_min_heap_ordered(left) and self.is_min_heap_ordered(right)
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}(pq={self.pq}, n={len(self)})>'
+        return f'<{self.__class__.__name__}(pq={self._pq}, n={len(self)})>'
 
     def __iter__(self):
-        yield from self.pq
+        """Iterates over all the items in this priority queue in ascending
+        order."""
+        copy = MinPQ(self.size())
+        for i in range(1, self._n + 1):
+            copy.insert(self._pq[i])
+        for i in range(1, copy._n + 1):
+            yield copy.del_min()
 
 
 def main():
     keys = [9, 5, 6, 2, 3]
     pq = MinPQ()
-   
+
     for key in keys:
         print(key)
         pq.insert(key)
-        if not pq.is_empty(): print(pq.del_min(), ' ')
+        if not pq.is_empty():
+            print(pq.del_min(), ' ')
         print(f'Is min heap ordered: {pq.is_min_heap_ordered(key)}')
     print(pq)
     print(f'( {pq.size()} left on pq.')
@@ -145,7 +154,3 @@ def main():
 
 if __name__ == '__main__':
     print(main())
-
-
-
-

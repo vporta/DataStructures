@@ -4,10 +4,12 @@ A string symbol table for extended ASCII strings, implemented
 using a 256-way trie.
 This implementation uses a 256-way trie.
  *  The put, contains, delete, and
- *  longest prefix operations take time proportional to the length
- *  of the key (in the worst case). Construction takes constant time.
+ *  longest prefix operations take time proportional to the length (L)
+ *  of the key (in the Worst Case). Construction takes O(1).
  *  The size, and is-empty operations take constant time.
- *  Construction takes constant time.
+ *  Construction takes O(1).
+ *  Typical case take Theta(L) for search hit and insert; Theta(logR*N) for a search miss.
+ *  Space takes Theta(R + 1)N
 """
 from queue import Queue
 

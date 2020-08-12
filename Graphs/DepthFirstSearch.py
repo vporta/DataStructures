@@ -19,6 +19,7 @@ Run depth first search on an undirected graph.
  *  11: 9 12
  *  12: 11 9
 """
+from Graphs.Bag import Bag
 from Graphs.Graph import Graph
 
 
@@ -31,9 +32,16 @@ class DepthFirstSearch:
         :param s: the source vertex
         """
         self._marked = [False for _ in range(g.get_V())]
-        self.__validate_vertex(s)
         self.g = g
-        self.__dfs(g, s)
+        if isinstance(s, Bag):
+            assert isinstance(s, Bag)
+            self.__validate_vertices(s)
+            for v in s:
+                if not self._marked[v.item]:
+                    self.__dfs(g, v.item)
+        else:
+            self.__validate_vertex(s)
+            self.__dfs(g, s)
 
     def get_g(self):
         return self.g
@@ -68,6 +76,14 @@ class DepthFirstSearch:
         if v < 0 or v >= marked_vertices:
             raise AttributeError(f'vertex {v} is not between 0 and {marked_vertices-1}')
 
+    def __validate_vertices(self, vertices):
+        if vertices is None:
+            raise AttributeError('argument is None')
+        for v in vertices:
+            if v is None:
+                raise ValueError('vertex is None')
+            self.__validate_vertex(v.item)
+
     def count(self):
         return self._count
 
@@ -97,7 +113,6 @@ def main(s):
         print('Not connected.')
     else:
         print('Connected')
-
 
 
 if __name__ == '__main__':

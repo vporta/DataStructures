@@ -4,8 +4,6 @@ LongestRepeatedSubstring.py
  *  repeated substring in that text using a suffix array.
 """
 
-from String.SuffixArray import SuffixArray
-
 
 class LongestRepeatedSubstring:
 
@@ -26,6 +24,7 @@ class LongestRepeatedSubstring:
 
     @classmethod
     def lrs(cls, text):
+        # longest repeated substring
         n = len(text)
         # create suffixes array and sort it in asc order
         suffixes = sorted([text[i:n] for i in range(n)])
