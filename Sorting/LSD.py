@@ -51,7 +51,7 @@ class LSD:
 
 
 def main():
-    with open("../resources/words3.txt") as f:
+    with open("../Resources/words3.txt") as f:
         a = "".join(f.readlines()).splitlines()
         words = []
         w = len(a[0].split(' '))

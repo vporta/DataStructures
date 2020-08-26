@@ -1,17 +1,13 @@
 """
 Queues.py
 A generic queue. 
-*  The {@code Queues} class represents a first-in-first-out (FIFO)
+ *  The Queues class represents a first-in-first-out (FIFO)
  *  queue of generic items.
- *  It supports the usual <em>enqueue</em> and <em>dequeue</em>
+ *  It supports the usual enqueue and dequeue
  *  operations, along with methods for peeking at the first item,
- *  testing if the queue is empty, and iterating through
- *  the items in FIFO order.
- *  <p>
- *  This implementation uses a singly linked list with a static nested class for
- *  linked-list nodes
- The <em>enqueue</em>, <em>dequeue</em>, <em>peek</em>, <em>size</em>, and <em>is-empty</em>
-  *  operations all take constant time in the worst case.
+ *  testing if the queue is empty, and iterating through the items in FIFO order.
+ *  This implementation uses a singly linked list with a static nested class for linked-list nodes
+ *  The enqueue, dequeue, peek, size, and is-empty operations all take constant time in the worst case.
 """
 
 
@@ -25,48 +21,50 @@ class Queue:
         def __repr__(self):
             return f"<_Node(_item={self._item}, _next={self._next})>"
 
-    def __init__(self, first=None, last=None):
-        self.first = first 
-        self.last = last 
-        self.n = 0 
+    def __init__(self):
+        self._first = None
+        self._last = None
+        self._n = 0
 
     def is_empty(self):
-        return self.first == None 
+        return self._first == None
 
     def size(self):
-        return self.n
+        return self._n
 
     def peek(self):
-        if self.is_empty(): raise Exception('No such element') 
-        return self.first._item
+        if self.is_empty():
+            raise Exception('No such element')
+        return self._first._item
 
     def enqueue(self, item):
-        oldlast = self.last
-        self.last = Queue._Node()
-        self.last._item = item 
-        self.last._next = None 
+        old_last = self._last
+        self._last = Queue._Node()
+        self._last._item = item
+        self._last._next = None
         if self.is_empty(): 
-            self.first = self.last 
+            self._first = self._last
         else: 
-            oldlast._next = self.last  
-        self.n += 1
+            old_last._next = self._last
+        self._n += 1
 
     def dequeue(self):
         if self.is_empty(): raise Exception('Queues underflow')
-        item = self.first._item 
-        self.first = self.first._next 
-        self.n -= 1 
-        if self.is_empty(): self.last = None 
+        item = self._first._item
+        self._first = self._first._next
+        self._n -= 1
+        if self.is_empty():
+            self._last = None
         return item 
 
     def __repr__(self):
-        return f"<Queues(first={self.first}, last={self.last}, n={self.n})>"
+        return f"<Queue(first={self._first}, last={self._last}, n={self._n})>"
 
     def __iter__(self):
-        a = []
-        for i in range(self.n):
-            a.append(self)
-        return iter(a)
+        current = self._first
+        while current is not None:
+            yield current._item
+            current = current._next
 
 
 def main():

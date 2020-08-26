@@ -93,7 +93,7 @@ class WordNet:
 
 
 def main():
-    synsets, hypernyms = '../resources/synsets.txt', '../resources/hypernyms.txt'
+    synsets, hypernyms = '../Resources/synsets.txt', '../Resources/hypernyms.txt'
     wordnet = WordNet(synsets, hypernyms)
     print(wordnet.nouns_dict())
     # print(wordnet.rev_nouns_dict())

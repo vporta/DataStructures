@@ -19,8 +19,8 @@ method so that when there are two possible subtrees to go down, you always choos
 side of the splitting line as the query point as the first subtree to explore—the closest point found while
 exploring the first subtree may enable pruning of the second subtree.
 """
-from BinarySearchTree.Point2D import Point2D
-from BinarySearchTree.RectHV import RectHV
+from Fundamentals.Point2D import Point2D
+from Fundamentals.RectHV import RectHV
 from collections import deque
 
 

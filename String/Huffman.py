@@ -1,12 +1,12 @@
 """
 Huffman.py
   * Compress or expand a binary input stream using the Huffman algorithm.
-  * $ python String/Huffman.py - < resources/abra.txt | python String/BinaryDump.py 60
+  * $ python String/Huffman.py - < Resources/abra.txt | python String/BinaryDump.py 60
   *  010100000100101000100010010000110100001101010100101010000100
   *  000000000000000000000000000110001111100101101000111110010100
   *  120 bits
   *
-  * $ python String/Huffman.py - < resources/abra.txt | python String/Huffman.py +
+  * $ python String/Huffman.py - < Resources/abra.txt | python String/Huffman.py +
   *  ABRACADABRA!
 """
 from Queues.MinPQ import MinPQ

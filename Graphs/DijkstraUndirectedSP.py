@@ -88,7 +88,7 @@ class DijkstraUndirectedSP:
                f'_edge_to={self._edge_to})>'
 
 def main():
-    with open("../resources/tinyEWG.txt", ) as f:
+    with open("../Resources/tinyEWG.txt", ) as f:
         values = "".join(f.readlines()).splitlines()
         V, E = int(values[0]), int(values[1])
         g = EdgeWeightedGraph(V)

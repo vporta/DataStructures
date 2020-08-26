@@ -163,7 +163,7 @@ class BellmanFordSP:
 
 
 def run_n():
-    with open("../resources/tinyEWDn.txt", ) as f:
+    with open("../Resources/tinyEWDn.txt", ) as f:
         values = "".join(f.readlines()).splitlines()
         V, E = int(values[0]), int(values[1])
         g = EdgeWeightedDigraph(V)
@@ -192,7 +192,7 @@ def run_n():
 
 
 def run_nc():
-    with open("../resources/tinyEWDnc.txt", ) as f:
+    with open("../Resources/tinyEWDnc.txt", ) as f:
         values = "".join(f.readlines()).splitlines()
         V, E = int(values[0]), int(values[1])
         g = EdgeWeightedDigraph(V)

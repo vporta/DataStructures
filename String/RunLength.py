@@ -4,7 +4,7 @@ RunLength.py
  *  run-length encoding.
 
  * This has runs of 15 0s, 7 1s, 7 0s, and 11 1s.
- * $ python String/RunLength.py - < resources/4runs.bin | python String/HexDump.py
+ * $ python String/RunLength.py - < Resources/4runs.bin | python String/HexDump.py
 """
 from String.BinaryStdIn import BinaryStdIn
 from String.BinaryStdOut import BinaryStdOut

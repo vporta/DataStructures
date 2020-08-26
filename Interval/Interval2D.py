@@ -12,7 +12,7 @@ The  Interval2D class represents a closed two-dimensional interval,
 
 
 from Interval.Interval1D import Interval1D
-from BinarySearchTree.Point2D import Point2D
+from Fundamentals.Point2D import Point2D
 
 
 class Interval2D:

@@ -2,7 +2,7 @@
 RectHV.py
 """
 import math
-from BinarySearchTree import Point2D
+from Fundamentals.Point2D import Point2D
 
 
 class RectHV:

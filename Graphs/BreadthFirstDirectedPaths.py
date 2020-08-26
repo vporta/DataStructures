@@ -115,7 +115,7 @@ class BreadthFirstDirectedPaths:
 
 
 def main():
-    file_name = '../resources/digraph1.txt'
+    file_name = '../Resources/digraph1.txt'
     with open(file_name) as f:
         ints = list()
         for line in f.read().split('\n'):

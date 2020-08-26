@@ -87,7 +87,7 @@ class DirectedCycle:
 
 def main():
     g = Digraph(13)
-    with open("../resources/tinyDG.txt", ) as f:
+    with open("../Resources/tinyDG.txt", ) as f:
         for line in f.readlines():
             vertices = " ".join(line.splitlines()).split(' ')
             if len(vertices) < 2:

@@ -62,7 +62,7 @@ class DepthFirstDirectedPaths:
 
 
 def main():
-    file_name = '../resources/tinyDG.txt'
+    file_name = '../Resources/tinyDG.txt'
     with open(file_name) as f:
         ints = list()
         for line in f.read().split('\n'):

@@ -27,7 +27,7 @@ class LookupCSV:
 
 
 def main():
-    file_name = "../resources/ip.csv"
+    file_name = "../Resources/ip.csv"
     key_name, val_name = int(input('Enter key')), int(input('Enter value'))
     LookupCSV.run(file_name, key_name, val_name)
 

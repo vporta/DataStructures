@@ -190,7 +190,7 @@ class TST:
 def main():
     t = TST()
 
-    with open('../resources/shellsST.txt') as f:
+    with open('../Resources/shellsST.txt') as f:
 
         lines = "".join(f.readlines()).split(' ')
         for i, line in enumerate(lines):

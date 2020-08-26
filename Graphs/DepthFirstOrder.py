@@ -122,7 +122,7 @@ class DepthFirstOrder:
 
 def main():
     g = Digraph(13)
-    with open("../resources/tinyDAG.txt", ) as f:
+    with open("../Resources/tinyDAG.txt", ) as f:
         for line in f.readlines():
             vertices = " ".join(line.splitlines()).split(' ')
             if len(vertices) < 2:

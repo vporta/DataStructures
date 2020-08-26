@@ -93,7 +93,7 @@ class LookupIndex:
 
 
 def main():
-    LookupIndex.run("../resources/ip.csv", ',')
+    LookupIndex.run("../Resources/ip.csv", ',')
 
 
 if __name__ == '__main__':

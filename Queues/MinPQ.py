@@ -21,7 +21,6 @@ class MinPQ:
     def __init__(self, _max=1):
         """ initializes an empty priority queue"""
         self._pq = [None for _ in range(_max+1)]
-        # self.build_heap(self.pq)
         self._n = 0
 
     def is_empty(self):

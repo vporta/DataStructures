@@ -18,7 +18,8 @@ def str_search(pattern, text):
             if text[i + j] != pattern[j]:
                 break 
             j += 1
-        if j == M: return i 
+        if j == M:
+            return i
         i += 1
     return N
 
@@ -39,8 +40,10 @@ def str_search_two(pattern, text):
             i -= j
             j = 0 
         i += 1
-    if j == M: return i - M 
-    else: return N  
+    if j == M:
+        return i - M
+    else:
+        return N
        
 
 def main():

@@ -157,7 +157,7 @@ class FordFulkerson:
 
 
 def main():
-    with open("../resources/tinyFN.txt", ) as f:
+    with open("../Resources/tinyFN.txt", ) as f:
         values = "".join(f.readlines()).splitlines()
         print(values)
         V, E = int(values[0]), int(values[1])

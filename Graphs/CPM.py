@@ -25,7 +25,7 @@ class CPM:
 
     @staticmethod
     def run():
-        with open("../resources/jobsPC.txt", ) as f:
+        with open("../Resources/jobsPC.txt", ) as f:
             values = "".join(f.readlines()).splitlines()
             print(values)
             n = int(values[0])

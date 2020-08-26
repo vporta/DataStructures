@@ -31,7 +31,7 @@ class Outcast:
 
 def main():
     nouns = ['horse', 'table', 'zebra', 'cat', 'bear']
-    synsets, hypernyms = '../resources/synsets.txt', '../resources/hypernyms.txt'
+    synsets, hypernyms = '../Resources/synsets.txt', '../Resources/hypernyms.txt'
     wordnet = WordNet(synsets, hypernyms)
     outcast = Outcast(wordnet)
     print(outcast)

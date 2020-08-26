@@ -28,8 +28,8 @@ class BlockFilter:
 
 
 def main():
-    block_list = "../resources/list.txt"
-    word_file = "../resources/tiny_tale.txt"
+    block_list = "../Resources/list.txt"
+    word_file = "../Resources/tiny_tale.txt"
     BlockFilter.run(block_list, word_file)
 
 

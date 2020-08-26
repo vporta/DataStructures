@@ -1,7 +1,7 @@
 """
 BinaryDump.py
  *  Reads in a binary file and writes out the bits, n per line.
- *  python String/BinaryDump.py 16 < resources/abra.txt
+ *  python String/BinaryDump.py 16 < Resources/abra.txt
 """
 from String.BinaryStdIn import BinaryStdIn
 

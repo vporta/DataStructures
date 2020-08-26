@@ -77,7 +77,7 @@ class InplaceMSD:
 
 
 def main():
-    with open("../resources/shells.txt", ) as f:
+    with open("../Resources/shells.txt", ) as f:
         a = "".join(f.readlines()).splitlines()
         words = []
         w = len(a[0].split(' '))

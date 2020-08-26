@@ -1,6 +1,7 @@
 # Bubble sort 
 # O(n**2)
 
+
 def bubble_sort(array):
     is_sorted = False
     n = len(array) - 1 
@@ -13,6 +14,8 @@ def bubble_sort(array):
                 is_sorted = False 
         n -= 1
     return array
+
+
 def swap(array, i, j):
     array[i], array[j] = array[j], array[i]
 
@@ -20,4 +23,6 @@ def swap(array, i, j):
 def main():
     array = [8, 5, 7, 2, 10]
     print(bubble_sort(array))
-main()
+
+if __name__ == '__main__':
+    main()

@@ -10,7 +10,7 @@ class DeDup:
     @staticmethod
     def run():
         _set = set()
-        with open("../resources/tiny_tale.txt") as f:
+        with open("../Resources/tiny_tale.txt") as f:
             words = " ".join(f.read().split('\n')).split(' ')
             print(words)
             for key in words:

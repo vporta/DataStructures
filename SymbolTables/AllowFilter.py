@@ -28,8 +28,8 @@ class AllowFilter:
 
 
 def main():
-    allow_list = "../resources/list.txt"
-    word_file = "../resources/tiny_tale.txt"
+    allow_list = "../Resources/list.txt"
+    word_file = "../Resources/tiny_tale.txt"
     AllowFilter.run(allow_list, word_file)
 
 

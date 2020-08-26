@@ -83,7 +83,7 @@ class EdgeWeightedDirectedCycle:
 
 def main():
     g = EdgeWeightedDigraph(8)
-    with open("../resources/tinyEWD.txt", ) as f:
+    with open("../Resources/tinyEWD.txt", ) as f:
         for line in f.readlines():
             vertices = " ".join(line.splitlines()).split(' ')
             if len(vertices) < 3:

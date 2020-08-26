@@ -120,7 +120,7 @@ class EulerianPath:
 
 def main():
     g = Graph(13)
-    with open("../resources/tinyG.txt", ) as f:
+    with open("../Resources/tinyG.txt", ) as f:
         for line in f.readlines():
             vertices = " ".join(line.splitlines()).split(' ')
             if len(vertices) < 2:

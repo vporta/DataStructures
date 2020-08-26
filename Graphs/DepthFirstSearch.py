@@ -3,7 +3,7 @@ DepthFirstSearch.py
 Run depth first search on an undirected graph.
  *  Runs in O(E + V) time.
 
- ../resources/tinyG.txt
+ ../Resources/tinyG.txt
  *  13 vertices, 13 edges
  *  0: 6 2 1 5
  *  1: 0
@@ -89,7 +89,7 @@ class DepthFirstSearch:
 
 
 def main(s):
-    file_name = '../resources/tinyG.txt'
+    file_name = '../Resources/tinyG.txt'
     with open(file_name) as f:
         ints = list()
         for line in f.read().split('\n'):

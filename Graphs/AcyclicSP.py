@@ -63,7 +63,7 @@ class AcyclicSP:
 
 
 def main():
-    with open("../resources/tinyEWDAG.txt", ) as f:
+    with open("../Resources/tinyEWDAG.txt", ) as f:
         values = "".join(f.readlines()).splitlines()
         V, E = int(values[0]), int(values[1])
         g = EdgeWeightedDigraph(V)

@@ -6,7 +6,9 @@ The Knuth (or Fisher-Yates) shuffling algorithm guarantees
  *  uniformly distributed numbers between 0 and 1.
 """
 import random  
-import math as m 
+from typing import *
+
+
 class Knuth:
 
     @staticmethod
@@ -15,6 +17,13 @@ class Knuth:
         for i in range(n):
             # choose index uniformly in [0, i]
             r = int(random.random() * (i + 1))
+            Knuth._exch(a, i, r)
+
+    @staticmethod
+    def shuffle_alternate(a: List[Any]):
+        n = len(a)
+        for i in range(n):
+            r = i + int(random.random() * n - i)
             Knuth._exch(a, i, r)
 
     @staticmethod
@@ -27,6 +36,7 @@ def main():
     print(a)
     Knuth.shuffle(a)
     print(a)
+
 
 if __name__ == '__main__':
     main()

@@ -92,7 +92,7 @@ class SAP:
 
 
 def main():
-    with open("../resources/digraph1.txt") as f:
+    with open("../Resources/digraph1.txt") as f:
         values = "".join(f.readlines()).split('\n')
         V, E = int(values[0]), int(values[1])
         g = Digraph(V)
